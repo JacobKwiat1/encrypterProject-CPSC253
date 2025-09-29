@@ -118,7 +118,7 @@ void Menu::textEncrypt() {
     }
     outputFile.close();
     delete [] out;
-    std::cout << "encrypted file has been saved to \"encrypted.txt\"";
+    std::cout << "encrypted file has been saved to \"encrypted.txt\"\n";
     return;
 }
 
@@ -133,6 +133,6 @@ void Menu::fileDecrypt() {
     std::string output = thing.decrypt(iFile, kFile);
     std::ofstream outputFile("decrypted.txt");
     outputFile << output;
-    std::cout << "output to \"decrypted.txt\"";
+    std::cout << "output to \"decrypted.txt\"\n";
     return;
 }
