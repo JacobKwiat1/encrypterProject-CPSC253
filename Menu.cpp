@@ -25,14 +25,14 @@ void Menu::prompt() {
 
 void Menu::fileEncrypt() {
     std::string inputF;
-    std::cout << "please enter file name here: ";
+    std::cout << "enter file name here: ";
     std::cin >> inputF;
     std::string in;
     std::string temp;
     std::ifstream inputFile(inputF);
 
     while(!inputFile.is_open()) {
-        std::cout << "file would not open, please enter file name to try again: ";
+        std::cout << "file would not open, enter file name to try again: ";
         std::cin >> inputF;
         inputFile.open(inputF);
     }
@@ -54,7 +54,7 @@ void Menu::fileEncrypt() {
     else {
         inputFile.open(temp);
         while(!inputFile.is_open()) {
-            std::cout << "file would not open, please enter file name to try again: ";
+            std::cout << "file would not open, enter file name to try again: ";
             std::cin >> temp;
             inputFile.open(temp);
         }
@@ -71,6 +71,7 @@ void Menu::fileEncrypt() {
         outputFile << out[i] << " ";
     }
     outputFile.close();
+        std::cout << "successfully encrypted to \"encrypted.txt\"\n";
     delete [] out;
     return;
 }
@@ -87,7 +88,7 @@ void Menu::textEncrypt() {
     std::getline(std::cin, in);
 
     //request key file name
-    std::cout << "if you have a key file enter the filename (including the .txt extension), otherwise enter \"none\": ";
+    std::cout << "if you have a key file enter the filename (including the .txt extension), otherwise enter \"0\": ";
     std::cin.clear();
     std::cin >> temp;
     if(temp == "0") {
@@ -98,7 +99,7 @@ void Menu::textEncrypt() {
         //make sure file is open and try again if not (probably not necessary or even useful for what it's trying to do)
         std::ifstream inputFile(temp);
         while(!inputFile.is_open()) {
-            std::cout << "file would not open, please enter file name to try again: ";
+            std::cout << "file would not open, enter file name to try again: ";
             std::cin >> temp;
             inputFile.open(temp);
         }
@@ -124,9 +125,9 @@ void Menu::textEncrypt() {
 void Menu::fileDecrypt() {
     std::string iFile;
     std::string kFile;
-    std::cout << "please enter filename (.txt included) you'd like to decrypt: ";
+    std::cout << "enter filename (.txt included) you'd like to decrypt: ";
     std::cin >> iFile;
-    std::cout << "please enter key filename (.txt included): ";
+    std::cout << "enter key filename (.txt included): ";
     std::cin >> kFile;
     Encrypter thing;
     std::string output = thing.decrypt(iFile, kFile);
