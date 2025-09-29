@@ -3,7 +3,7 @@
 class Encrypter {
     public:
         Encrypter() {}
-        int* encrypt(std::string);
+        int* encrypt(std::string); 
         int* encrypt(std::string, std::string);
         std::string decrypt(std::string, std::string);
     private:

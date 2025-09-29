@@ -30,17 +30,16 @@ void Menu::fileEncrypt() {
     std::string in;
     std::string temp;
     std::ifstream inputFile(inputF);
+
     while(!inputFile.is_open()) {
         std::cout << "file would not open, please enter file name to try again: ";
         std::cin >> inputF;
         inputFile.open(inputF);
     }
-    std::stringstream stringyboi;
-    stringyboi << inputFile.rdbuf();
-    in = stringyboi.str();
-    // while(inputFile >> temp) {
-    //     in += temp;
-    // }
+
+    std::stringstream stringBuffer;
+    stringBuffer << inputFile.rdbuf();
+    in = stringBuffer.str();
     inputFile.close();
 
 
@@ -49,6 +48,7 @@ void Menu::fileEncrypt() {
     Encrypter thing;
     int* out;
     if(temp == "0") {
+        std::cout << "key will be generated into a file named \"key.txt\"\n";
         out = thing.encrypt(in);
     }
     else {
@@ -58,10 +58,9 @@ void Menu::fileEncrypt() {
             std::cin >> temp;
             inputFile.open(temp);
         }
+
         std::string key;
-        while(inputFile >> temp) {
-            key += temp;
-        }
+        std::getline(inputFile, key);
 
         out = thing.encrypt(in, key);
         inputFile.close();
@@ -103,15 +102,15 @@ void Menu::textEncrypt() {
             std::cin >> temp;
             inputFile.open(temp);
         }
+
         std::string key;
-        //read file to key
-        // while(inputFile >> temp) {
-        //     key += temp;
-        // }
         std::getline(inputFile, key);
+
         out = thing.encrypt(in, key);
         inputFile.close();
     }
+
+    //output to file "encrypted.txt"
     std::ofstream outputFile("encrypted.txt");
     for(int i = 0; i < in.length()+1; i++) {
         outputFile << out[i] << " ";
@@ -136,27 +135,3 @@ void Menu::fileDecrypt() {
     std::cout << "output to \"decrypted.txt\"";
     return;
 }
-// std::string Menu::requestKey() {
-//     std::cout << "if you have a key file enter the filename (including the .txt extension), otherwise enter 0: ";
-//     std::cin >> temp;
-//     Encrypter thing;
-//     int* out;
-//     if(temp == "0") {
-//         out = thing.encrypt(in);
-//     }
-//     else {
-//         inputFile.open(temp);
-//         while(!inputFile.is_open()) {
-//             std::cout << "file would not open, please enter file name to try again: ";
-//             std::cin >> temp;
-//             inputFile.open(temp);
-//         }
-//         std::string key;
-//         while(inputFile >> temp) {
-//             key += temp;
-//         }
-
-//         out = thing.encrypt(in, key);
-//     }
-//     inputFile.close();
-// }
