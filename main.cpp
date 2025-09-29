@@ -24,6 +24,11 @@ int main() {
     // std::string output = thing.decrypt(iFile, kFile);
     //std::cout << output;
     Menu menu;
+    bool going = true;
+    do {
     menu.prompt();
+    std::cout << "would you like to continue with the program? 1 for yes and 0 for no ";
+    std::cin >> going;
+    } while (going);
     return 0;
 }
